@@ -1,0 +1,4 @@
+abbiamo settato l'expiration time a 86400 s (24h)   nel file /etc/keystone/keystone.conf
+
+link al sito con tutte le configurazioni
+https://docs.openstack.org/keystone/latest/configuration/config-options.html#token.expiration
