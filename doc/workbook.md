@@ -98,6 +98,11 @@ Host: 172.16.1.210
 
 ```
 
+
+Stop all the containers:
+```sh
+docker stop $(docker ps -a -q)
+```
 ## Consumer Dockerfile:
 
 From an Ubuntu image install python3 and the dependencies, move the script files inside the image, then run the consumer.py script:
@@ -109,9 +114,7 @@ ADD ./consumer.py /root/
 RUN apt-get update && apt-get install -y python3.8
 RUN apt update
 RUN apt install -y python3-pip
-RUN pip3 install paramiko
-RUN pip3 install keystoneauth1
-RUN pip3 install prettytable
+RUN pip3 install paramiko && pip3 install keystoneauth1 && pip3 install prettytable
 CMD ["/usr/bin/python3", "/root/consumer.py"]
 ```
 ## Producer Dockerfile:
@@ -123,8 +126,7 @@ ADD ./producer.py /root/
 RUN apt-get update && apt-get install -y python3.8
 RUN apt update
 RUN apt install -y python3-pip
-RUN pip3 install paramiko
-RUN pip3 install keystoneauth1
+RUN pip3 install paramiko && pip3 install keystoneauth1
 CMD ["/usr/bin/python3", "/root/producer.py"]
 
 ```
