@@ -5,6 +5,8 @@ OpenStack: Timeseries as a service
 Gnocchi is an open-source, multi-tenant timeseries, metrics and resources database. It provides an HTTP REST interface to create and manipulate the data. It is designed to store metrics at a very large scale on CEPH while providing access to metrics and resources information and history.
 Install in an OpenStack instance the Gnocchi database and create two simple applications, one consumer and one producer, that exploit the REST interface exposed by Gnocchi to store/retrieve the data. The producer must mimic the periodic production of measurement data (random data is OK) to be stored in the timeseries database, the consumer must retrieve periodically some aggregated values like average, max, min, etc.
 
+![img](Gnocchi_architecture.png)
+
 ## Gnocchi
 
 We created 5 metrics on gnocchi db, one for each machine,
