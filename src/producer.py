@@ -1,8 +1,11 @@
 import time
 import paramiko
-import requests 
 import json
 from datetime import datetime
+from keystoneauth1 import session
+from keystoneauth1.identity import v3
+from keystoneauth1 import exceptions
+
 
 GNOCCHI_URL = 'http://252.3.28.194:8041/v1/metric/{0}/measures'
 
@@ -23,44 +26,36 @@ def get_memory_info(host):
     result = []
     num_request = 0
     while num_request < 3:
-        print("Getting memory data {req: d}".format(req=num_request+1), end="\r", flush=True)
         stdin, stdout, stderr = ssh_client.exec_command('free -m')
         memory_usage = stdout.read().decode("utf-8").split()
+        print(memory_usage)
         timestamp = str(datetime.now().replace(microsecond=0))
-        result.append({"timestamp" : timestamp,"value" : round(int(memory_usage[8])/int(memory_usage[7]) * 100, 2)})
+        result.append({"timestamp" : timestamp,"value" : round(float(memory_usage[8])/float(memory_usage[7]) * 100, 2)})
         num_request += 1
         time.sleep(4)
     print("Data retreived, closing connection")
     ssh_client.close()
     return result
 
-
-def post_request(url, token, values):
-    """
-        Push the data to gnocchi db.
-        ------------
-        params:
-            body: post body data
-    """
-    print("Sending data to gnocchi")
-    header = {}
-    header['Content-Type'] = 'application/json'
-    header['X-AUTH-TOKEN'] = token
-    response = requests.post(url = url, json=values, headers=header) 
-    code_resp = response.status_code
-    print("Response status: " + str(code_resp))
-    
-
 if __name__ == "__main__":
     # retrieving token and hosts from json
     with open('./config.json') as conf:
         config = json.load(conf)
 
+    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',  #OS_AUTH_URL, si trovano nel admin-openrc.sh
+                       username='admin', #OS_USERNAME
+                       password='openstack',
+                       project_id='a0ad9a8653254510b46538253032c380',  #OS_PROJECT_ID, 
+                       user_domain_name='admin_domain')  #OS_USER_DOMAIN_NAME
+
+    sess = session.Session(auth=auth)
+
     while True:
         for host in config['hosts']:
-            body = get_memory_info(host)   
-            post_request(GNOCCHI_URL.format(host['metric']),config['token'], body)
+            body = get_memory_info(host) 
+            print("Sending data to gnocchi")
+            res = sess.post(url=GNOCCHI_URL.format(host['metric']), json=body, headers={'Content-Type':'application/json'})
+            print("Response status: " + str(res))
             print("Data:")
             for value in body:
-                print("Timestamp: {0} Memory Usage: {1} %".format(value['timestamp'], value['value']))
-        time.sleep(30)
+                print("Timestamp: {0} Memory usage: {1} %".format(value['timestamp'], value['value']))
