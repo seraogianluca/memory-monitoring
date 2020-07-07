@@ -1,6 +1,5 @@
 {
-    "token": "gAAAAABe_f9pbgN96Yn5Xn43Srhffz8eq0UEGzOF3ZvYYdic89Cp-9SjEW7cIRbU2-qYxcMpXrHKkKlIFIhrZADXamR3rli-LCLO0paRKZZVxJRDcuetQ4r95Nvsaf42I65XWRlgP-SC5fZbgRlhxRdZxH3xmirsJ1CmY8X55tY39V-stdsJUK4",
-    "hosts": [
+   "hosts": [
         {
             "ip": "172.16.3.28",
             "user": "root",

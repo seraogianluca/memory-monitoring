@@ -17,7 +17,7 @@ if __name__ == "__main__":
     gran = int(input("1) Minute\n2) Hour\n"))
 
     # retrieving hosts from json
-    with open('./config.json') as conf:
+    with open('root/config.json') as conf:
         config = json.load(conf)
 
     auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',  #OS_AUTH_URL, si trovano nel admin-openrc.sh
