@@ -7,7 +7,7 @@ if __name__ == "__main__":
     GNOCCHI_URL = 'http://252.3.28.194:8041/v1/metric'
 
     # Retrieving hosts from json
-    with open('./config_copy.json') as conf:
+    with open('./config.json') as conf:
         config = json.load(conf)
 
     # Authentication
@@ -25,5 +25,5 @@ if __name__ == "__main__":
         host['metric'] = data['id']
         newconfig['hosts'].append(host)
 
-    with open("./config_copy.json", "w") as f:
+    with open("./config.json", "w") as f:
         json.dump(newconfig, f)
