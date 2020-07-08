@@ -6,7 +6,7 @@ from keystoneauth1 import session
 from keystoneauth1.identity import v3
 
 
-GNOCCHI_URL = 'http://252.3.28.194:8041/v1/metric/{0}/measures'
+GNOCCHI_URL = 'http://**GNOCCHI_IP**/v1/metric/{0}/measures'
 
 def get_memory_info(host):
     """
@@ -41,11 +41,11 @@ if __name__ == "__main__":
         config = json.load(conf)
 
     # Authentication
-    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',
-                       username='admin',
-                       password='openstack',
-                       project_id='a0ad9a8653254510b46538253032c380', 
-                       user_domain_name='admin_domain')
+    auth = v3.Password(auth_url='http://**OPENSTACK_IP**/v3',
+                       username='**OPENSTACK_USER**',
+                       password='**OPENSTACK_PASSWORD**',
+                       project_id='**OPENSTACK_PROJECT_ID**', 
+                       user_domain_name='**OPENSTACK_USER_DOMAIN**')
     sess = session.Session(auth=auth)
 
     while True:
