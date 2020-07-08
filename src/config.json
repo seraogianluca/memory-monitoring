@@ -1,1 +1,6 @@
-{"hosts": [{"ip": "172.16.3.28", "user": "root", "password": "valle", "metric": "a7889a1c-a68c-4e52-adc0-fc59a4530bd8"}, {"ip": "172.16.2.46", "user": "root", "password": "tonno", "metric": "974a19d4-d59c-4928-a80d-8086532a52b8"}, {"ip": "172.16.1.210", "user": "root", "password": "lorenzo", "metric": "91bdbe13-1221-4b5e-93b7-8934638c2fce"}, {"ip": "172.16.1.133", "user": "root", "password": "matilde", "metric": "587dcc98-72e7-40ea-a591-475dd99ec95f"}, {"ip": "172.16.1.211", "user": "root", "password": "bifecco", "metric": "581b03f3-2aae-42e0-9165-6f0c131c5d43"}]}
+{"hosts": [
+  {"ip": "MACHINE_IP", 
+   "user": "MACHINE_USER",
+   "password": "MACHINE_PASSWORD",
+   "metric": "METRIC_ID"}
+]}
