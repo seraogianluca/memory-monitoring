@@ -32,10 +32,10 @@ root@host-name:~/consumer# ls
 config.json  consumer.py  Dockerfile requirements.txt
 ```
 
-The `config.json`file is the same and must be in both the directories.
+The `config.json`file is the same and must be in both the directories. Change the authentication parameters and the Gnocchi url in both producer and consumer scripts.
 
 ### Producer
-Change the Gnocchi ip in the `producer.py` file. Build the customized image using the Dockerfile. Run the following commands inside the producer directory.
+Build the customized image using the Dockerfile. Run the following commands inside the producer directory.
 
 ```sh
 docker build -t producer .
@@ -54,7 +54,7 @@ or if you want to see the producer output in realtime run the container in foreg
 Every 30 seconds, for every machine, the producer makes three requests, one every 4 seconds.
 
 ### Consumer
-Change the Gnocchi ip in the `consumer.py` file. Build the customized image of the consumer using the Dockerfile. Run the following commands inside the producer directory.
+Build the customized image of the consumer using the Dockerfile. Run the following commands inside the producer directory.
 
 ```sh
 docker build -t consumer .
