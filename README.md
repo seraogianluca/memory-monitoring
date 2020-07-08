@@ -144,7 +144,7 @@ To let the application work the `config.json` should be properly filled. The con
 }
 ```
 
-Don't worry! We created a script to create a metric for each machine in the database. Just change the Gnocchi ip in the script, fill a `config.json` file with the ip, username and password of the machine you want to monitor and run it.
+Don't worry! We created a [script](/src/init_db.py) to create a metric for each machine in the database. Just change the Gnocchi ip in the script, fill a `config.json` file with the ip, username and password of the machine you want to monitor and run it.
 
 ## Credits
 
