@@ -13,7 +13,7 @@ The project is composed by a producer and a consumer. The producer reads the dat
 ## Run our paramount project by yourself!
 To run this project, first you need a cloud infrastructure with Openstack and Gnocchi installed on top. Then, you need Docker to run both producer and consumer in containers.
 
-Copy the consumer and producer direcotries to the machine where docker is installed and connect to it. Directories must have the following structure:
+Copy the consumer and producer directories to the machine where docker is installed and connect to it. Directories must have the following structure:
 
 ```sh
 root@host-name:~# ls
@@ -143,3 +143,9 @@ To let the application work the `config.json` should be properly filled. The con
     ]
 }
 ```
+
+Don't worry! We created a script to create a metric for each machine in the database. Just change the Gnocchi ip in the script, fill a `config.json` file with the ip, username and password of the machine you want to monitor and run it.
+
+## Credits
+
+@thorongil05, @ragnar1002, @matildao-pane, @seraogianluca

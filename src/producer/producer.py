@@ -4,7 +4,6 @@ import json
 from datetime import datetime
 from keystoneauth1 import session
 from keystoneauth1.identity import v3
-from keystoneauth1 import exceptions
 
 
 GNOCCHI_URL = 'http://252.3.28.194:8041/v1/metric/{0}/measures'

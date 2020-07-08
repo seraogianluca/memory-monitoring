@@ -3,7 +3,6 @@ import time
 from prettytable import PrettyTable
 from keystoneauth1 import session
 from keystoneauth1.identity import v3
-from keystoneauth1 import exceptions
 
 
 aggregations = ["mean","min","max"]
