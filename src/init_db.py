@@ -4,18 +4,18 @@ from keystoneauth1.identity import v3
 
 if __name__ == "__main__":
     
-    GNOCCHI_URL = 'http://252.3.28.194:8041/v1/metric'
+    GNOCCHI_URL = 'http://**PLACE_YOUR_GNOCCHI_IP_HERE**/v1/metric'
 
     # Retrieving hosts from json
     with open('./config.json') as conf:
         config = json.load(conf)
 
     # Authentication
-    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',
-                       username='admin',
-                       password='openstack',
-                       project_id='a0ad9a8653254510b46538253032c380', 
-                       user_domain_name='admin_domain')
+    auth = v3.Password(auth_url='http://**PLACE_YOUR_KEYSTONE_IP_HERE**/v3',
+                       username='**OPENSTACK_USERNAME**',
+                       password='**OPENSTACK_PASSWORD**',
+                       project_id='**OPENSTACK_PROJECT_ID**', 
+                       user_domain_name='**OPENSTACK_USER_DOMAIN**')
     sess = session.Session(auth=auth)
 
     newconfig = {'hosts':[]}
