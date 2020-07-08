@@ -28,7 +28,6 @@ def get_memory_info(host):
     while num_request < 3:
         stdin, stdout, stderr = ssh_client.exec_command('free -m')
         memory_usage = stdout.read().decode("utf-8").split()
-        print(memory_usage)
         timestamp = str(datetime.now().replace(microsecond=0))
         result.append({"timestamp" : timestamp,"value" : round(float(memory_usage[8])/float(memory_usage[7]) * 100, 2)})
         num_request += 1
@@ -38,16 +37,16 @@ def get_memory_info(host):
     return result
 
 if __name__ == "__main__":
-    # retrieving token and hosts from json
+    # Retrieving hosts from json
     with open('/root/config.json') as conf:
         config = json.load(conf)
 
-    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',  #OS_AUTH_URL, si trovano nel admin-openrc.sh
-                       username='admin', #OS_USERNAME
+    # Authentication
+    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',
+                       username='admin',
                        password='openstack',
-                       project_id='a0ad9a8653254510b46538253032c380',  #OS_PROJECT_ID, 
-                       user_domain_name='admin_domain')  #OS_USER_DOMAIN_NAME
-
+                       project_id='a0ad9a8653254510b46538253032c380', 
+                       user_domain_name='admin_domain')
     sess = session.Session(auth=auth)
 
     while True:
@@ -59,3 +58,4 @@ if __name__ == "__main__":
             print("Data:")
             for value in body:
                 print("Timestamp: {0} Memory usage: {1} %".format(value['timestamp'], value['value']))
+        time.sleep(30)

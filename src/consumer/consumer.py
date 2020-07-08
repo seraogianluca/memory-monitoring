@@ -16,28 +16,30 @@ if __name__ == "__main__":
     print("Please, chose a granularity:\n")
     gran = int(input("1) Minute\n2) Hour\n"))
 
-    # retrieving hosts from json
+    # Retrieving hosts from json
     with open('/root/config.json') as conf:
         config = json.load(conf)
 
-    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',  #OS_AUTH_URL, si trovano nel admin-openrc.sh
-                       username='admin', #OS_USERNAME
+    # Authentication
+    auth = v3.Password(auth_url='http://252.3.28.251:5000/v3',
+                       username='admin',
                        password='openstack',
-                       project_id='a0ad9a8653254510b46538253032c380',  #OS_PROJECT_ID, 
-                       user_domain_name='admin_domain')  #OS_USER_DOMAIN_NAME
-
+                       project_id='a0ad9a8653254510b46538253032c380', 
+                       user_domain_name='admin_domain')
     sess = session.Session(auth=auth)
 
     while True:
         for host in config['hosts']:
             res = sess.get(url=GNOCCHI_URL.format(host['metric'], aggregations[aggregation_type-1], granularity[gran-1]))
             data=json.loads(res.text)   
-            print('\033[1m' + "Host: " + host['ip'] + '\033[0m')
-            print(str(data))
-            t = PrettyTable(['Timestamp', 'Granularity', aggregations[aggregation_type-1].upper()])
 
-            for i in data[(0 if len(data)<5 else len(data)-5):len(data)]:   #stampa i 5 piu recenti
-                t.add_row([i[0], i[1], i[2]])
+            print('\033[1m' + "Host: " + host['ip'] + '\033[0m')
+
+            # Print the 5 most recent data
+            t = PrettyTable(['Timestamp', 'Granularity', aggregations[aggregation_type-1].upper()])   
+            for i in data[(0 if len(data)<5 else len(data)-5):len(data)]:
+                mean = round(float(i[2]), 2)
+                t.add_row([i[0], i[1], str(mean)])
 
             print(t)
         time.sleep(30)
