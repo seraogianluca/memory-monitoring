@@ -1,5 +1,7 @@
 # Memory Monitoring
 
+[![CodeFactor](https://www.codefactor.io/repository/github/seraogianluca/memory-monitoring/badge)](https://www.codefactor.io/repository/github/seraogianluca/memory-monitoring)
+
 ## What is this repository?
 It is a project for the Cloud Computing course of the MSc Artificial Intelligence and Data Engineering at University of Pisa.
 
